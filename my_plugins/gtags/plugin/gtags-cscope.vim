@@ -264,8 +264,8 @@ function! s:GtagsCscope()
 	:nmap <C-\><SPACE> :cs find<SPACE>
 	:nmap <C-@><SPACE> :scs find<SPACE>
 	:nmap <C-@><C-@><SPACE> :vert scs find<SPACE>
-	":nmap <F2> :copen<CR>
-	":nmap <F3> :cs find d <C-R>=expand("<cword>")<CR>:<C-R>=line('.')<CR>:%<CR>
+	" :nmap <F2> :copen<CR>
+	" :nmap <F3> :cs find d <C-R>=expand("<cword>")<CR>:<C-R>=line('.')<CR>:%<CR>
 	:nmap <F4> :cclose<CR>
     endif
 endfunction
