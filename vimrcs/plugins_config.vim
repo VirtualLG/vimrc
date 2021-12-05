@@ -42,22 +42,6 @@ nmap <C-n> <Plug>yankstack_substitute_newer_paste
 
 
 """"""""""""""""""""""""""""""
-" => CTRL-P
-""""""""""""""""""""""""""""""
-let g:ctrlp_working_path_mode = 0
-
-" Quickly find and open a file in the current working directory
-" let g:ctrlp_map = '<C-f>'
-map <leader>j :CtrlP<cr>
-
-" Quickly find and open a buffer
-map <leader>b :CtrlPBuffer<cr>
-
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-
-
-""""""""""""""""""""""""""""""
 " => ZenCoding
 """"""""""""""""""""""""""""""
 " Enable all functions in all modes
@@ -109,7 +93,7 @@ let g:multi_cursor_quit_key            = '<Esc>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => surround.vim config
-" Annotate strings with gettext 
+" Annotate strings with gettext
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
@@ -186,3 +170,25 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 " Copy the link to the line of a Git repository to the clipboard
 nnoremap <leader>v :.GBrowse!<CR>
 xnoremap <leader>v :'<'>GBrowse!<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => fzf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <c-p> :FZF<CR>
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Path completion with custom source command
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
+
+" Word completion with custom spec with popup layout option
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'window': { 'width': 0.2, 'height': 0.9, 'xoffset': 1 }})
+
