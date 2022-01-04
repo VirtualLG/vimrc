@@ -22,9 +22,10 @@ nnoremap L gt
 "去除第一行的帮助提示
 let NERDTreeMinimalUI=1
 wincmd l
-"
+let NERDTreeDirArrows=1
+
 "打开vim时自动打开
-autocmd VimEnter * NERDTree | wincmd p
+"autocmd VimEnter * NERDTree | wincmd p
 "autocmd BufWinEnter * NERDTreeMirror
 
 "<F3>作为toggle
@@ -32,8 +33,14 @@ nmap <F3> :NERDTreeToggle<CR>
 "当所有文件关闭时，关闭项目树窗格
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" nerdtree sync
-let g:nerdtree_sync_cursorline = 1
+"nerdtree sync
+let g:nerdtree_sync_cursorline=1
+
+"打开新buffer时，退出nerdtree
+let NERDTreeQuitOnOpen=1
+
+"Automatically delete the buffer of the file you just deleted with NerdTree
+let NERDTreeAutoDeleteBuffer=1
 
 "########################################TagBar
 "在这儿设定二者的分布
