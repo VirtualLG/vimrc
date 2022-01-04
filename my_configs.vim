@@ -42,19 +42,6 @@ let NERDTreeQuitOnOpen=1
 "Automatically delete the buffer of the file you just deleted with NerdTree
 let NERDTreeAutoDeleteBuffer=1
 
-"######################################## NerdTreeGitStatus
-let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" :  ✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ "Unknown"   : "?"
-    \ }
-
 "########################################TagBar
 "在这儿设定二者的分布
 "let g:tagbar_vertical = 25
@@ -136,3 +123,10 @@ nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 let g:molokai_original = 1
 let g:rehash256 = 1
 
+"######################################### YouCompleteMe
+""let g:ycm_key_invoke_completion = '<c-f>'
+let g:ycm_global_ycm_extra_conf = '~/.vim_runtime/my_plugins/youcompleteme/third_party/ycmd/.ycm_extra_conf.py'
+
+"代码提示框的高亮配置
+highlight PMenu ctermbg=red ctermfg=15
+highlight PMenuSel ctermbg=14 ctermfg=16"                                                                   "
