@@ -42,6 +42,19 @@ let NERDTreeQuitOnOpen=1
 "Automatically delete the buffer of the file you just deleted with NerdTree
 let NERDTreeAutoDeleteBuffer=1
 
+"######################################## NerdTreeGitStatus
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" :  ✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
 "########################################TagBar
 "在这儿设定二者的分布
 "let g:tagbar_vertical = 25
@@ -122,3 +135,4 @@ nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 "######################################### molokai color scheme
 let g:molokai_original = 1
 let g:rehash256 = 1
+
