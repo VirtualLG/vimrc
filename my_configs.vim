@@ -162,3 +162,18 @@ let g:UltiSnipsEditSplit="vertical"
 " vim-signify
 """""""""""""""""""""""""""""""""""""""""""""""""""
 set updatetime=100
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-easymotion
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:EasyMotion_smartcase = 1
+map <Space> <Plug>(easymotion-overwin-f2)
+map <Space>h <Plug>(easymotion-linebackward)
+map <Space>j <Plug>(easymotion-j)
+map <Space>k <Plug>(easymotion-k)
+map <Space>l <Plug>(easymotion-lineforward)
+map <Space>. <Plug>(easymotion-repeat)
+
+" set mouse=a
+"
+
