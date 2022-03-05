@@ -91,6 +91,27 @@ let GtagsCscope_Ignore_Case = 1
 let GtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
 
+" ------------------------------------------------------------------------------
+" Search the "GTAGS"
+" 1. 先当前路径下找 "GTAGS", 然后依次往上级目录找
+" ------------------------------------------------------------------------------
+"
+function! Set_proj_root()
+   " Step1: find GTAGS in the current working directory and upper
+   " directory.
+   let tags_db = findfile("GTAGS", ".;")
+   let tags_path = ""
+   if (!empty(tags_db) && filereadable(tags_db))
+       let tags_path = strpart(tags_db, 0, match(tags_db, "/GTAGS$"))
+   endif
+
+   if tags_path != ""
+       exe "chdir " . tags_path
+   endif
+endfunction
+
+call Set_proj_root()
+
 "######################################### AutoHighlight, when idle
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
