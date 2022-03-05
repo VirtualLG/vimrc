@@ -176,6 +176,8 @@ xnoremap <leader>v :'<'>GBrowse!<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => fzf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set rtp+=~/.fzf
+
 nmap <C-p> :FZF<CR>
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)

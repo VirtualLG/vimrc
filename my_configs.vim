@@ -91,9 +91,6 @@ let GtagsCscope_Ignore_Case = 1
 let GtagsCscope_Auto_Map = 1
 let GtagsCscope_Quiet = 1
 
-"######################################### fzf
-set rtp+=~/.fzf
-
 "######################################### AutoHighlight, when idle
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
