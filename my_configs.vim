@@ -144,6 +144,9 @@ let g:ycm_cache_omnifunc=0                         " 禁止缓存匹配项，每
 let g:ycm_seed_identifiers_with_syntax=1           " 语法关键字补全
 let g:ycm_key_invoke_completion="<c-right>"
 
+nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>                " turn off YCM
+nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>                " turn on YCM
+
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips
 """""""""""""""""""""""""""""""""""""""""""""""""""
