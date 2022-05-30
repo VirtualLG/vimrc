@@ -2699,9 +2699,9 @@ endif
 
 if !has_key(g:polyglot_is_disabled, 'sensible')
   " Use 2-spaces tab indentation by default
-  if &tabstop == 8
-    let &tabstop = 2
-  endif
+  " if &tabstop == 8
+  "   let &tabstop = 2
+  " endif
 
   " Set shiftwidth to proper value as users often mix it with tabstop
   if &shiftwidth > &tabstop
@@ -2924,7 +2924,7 @@ if !has_key(g:polyglot_is_disabled, 'autoindent')
     let dir = expand('%:p:h')
     let level = 3
     while isdirectory(dir) && dir !=# fnamemodify(dir, ':h') && level > 0
-      " Ignore files from homedir and root 
+      " Ignore files from homedir and root
       if dir == expand('~') || dir == '/'
         unlet b:sleuth_culprit
         return

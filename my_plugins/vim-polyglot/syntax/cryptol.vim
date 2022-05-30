@@ -15,7 +15,7 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-set expandtab
+" set expandtab
 set list lcs=tab:>-,trail:.
 
 " (Qualified) identifiers (no default highlighting)
