@@ -9,6 +9,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 " 使用以下配置，告诉vim，把所有数字都当成十进制
 set nrformats=
 
+set colorcolumn=81
+
 :hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
 :hi TabLine ctermfg=Blue ctermbg=Yellow
 :hi TabLineSel ctermfg=Red ctermbg=Yellow
