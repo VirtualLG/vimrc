@@ -219,3 +219,20 @@ function! s:align()
   endif
 endfunction
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-tmux-navigator
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tmux_navigator_save_on_switch = 2   " actions while navigator to other tmux panes
+                                          " 1: update, write current buffer, but only if changed
+                                          " 2: wall, write all buffers
+
+" let g:tmux_navigator_disable_when_zoomed = 1
+
+" define custom key map
+" let g:tmux_navigator_no_mappings = 1
+" nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+" nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+" nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+" nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
