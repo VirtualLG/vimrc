@@ -85,14 +85,13 @@ endfunction
 function! s:configure_plugin_NerdTree()
         " Nerd Tree Config
         let g:NERDTreeWinPos = "right"
-        let NERDTreeShowHidden=0
-        let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+        let g:NERDTreeShowHidden=1
+        let g:NERDTreeIgnore = ['\.pyc$', '__pycache__']
         let g:NERDTreeWinSize=35
-        let NERDTreeMinimalUI=1          " 去除第一行的帮助提示
-        wincmd l
-        let NERDTreeDirArrows=1
-        let NERDTreeQuitOnOpen=1         " 打开新buffer时，退出nerdtree
-        let NERDTreeAutoDeleteBuffer=1   " 从NerdTree删除文件时，自动删除对应buffer
+        let g:NERDTreeMinimalUI=1         " 去除第一行的帮助信息
+        let g:NERDTreeDirArrows=1         " 显示文件夹箭头
+        let g:NERDTreeQuitOnOpen=1        " 打开新buffer时，退出nerdtree
+        let g:NERDTreeAutoDeleteBuffer=1  " 从NerdTree删除文件时，自动删除对应buffer
 
         " NerdTree Key map
         map <leader>nb :NERDTreeFromBookmark<Space>
