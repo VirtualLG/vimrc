@@ -19,25 +19,6 @@ set colorcolumn=81
 nnoremap H gT
 nnoremap L gt
 
-"########################################TagBar
-"在这儿设定二者的分布
-"let g:tagbar_vertical = 25
-"去除第一行的帮助信息
-"let g:tagbar_compact = 1
-"当编辑代码时，在Tagbar自动追踪变量
-let g:tagbar_autoshowtag = 1
-"个人爱好，展开关闭文件夹的图标
-let g:tagbar_iconchars = ['▸', '▾']
-"<F2>作为toggle
-nmap <F2> :TagbarToggle<CR>
-"打开vim时自动打开
-"autocmd VimEnter * nested :TagbarOpen
-"wincmd l
-"如果不加这句，打开vim的时候当前光标会在Nerdtree区域
-"autocmd VimEnter * wincmd l
-"配置tagbar窗口位于左侧
-let g:tagbar_left = 1
-
 "########################################Toggle window fullscreen
 function! Zoom ()
     " check if is the zoomed state (tabnumber > 1 && window == 1)

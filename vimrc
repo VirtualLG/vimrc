@@ -223,6 +223,17 @@ function! s:configure_plugin_molokai()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_tagbar()
+        let g:tagbar_autoshowtag = 1          "当编辑代码时，在Tagbar自动追踪变量
+        let g:tagbar_iconchars = ['▸', '▾']   " 个人爱好，展开关闭文件夹的图标
+        let g:tagbar_left = 1                 " 配置tagbar窗口位于左侧
+
+        nmap <F2> :TagbarToggle<CR>           " <F2>作为toggle
+endfunction
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -247,6 +258,7 @@ function! s:configure_plugins()
         Plug 'airblade/vim-gitgutter'
         Plug 'junegunn/fzf.vim'
         Plug 'vim-scripts/gtags.vim'
+        Plug 'preservim/tagbar'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -267,6 +279,7 @@ function! s:configure_plugins()
         call s:configure_plugin_fzf()
         call s:configure_plugin_gtags()
         call s:configure_plugin_molokai()
+        call s:configure_plugin_tagbar()
 endfunction
 
 
