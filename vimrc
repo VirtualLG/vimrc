@@ -297,6 +297,7 @@ function! s:configure_plugins()
         Plug 'mhinz/vim-signify'
         Plug 'sheerun/vim-polyglot'
         Plug 'christoomey/vim-tmux-navigator'
+        Plug 'lfv89/vim-interestingwords'
 
 	" Themes
         Plug 'morhetz/gruvbox'
