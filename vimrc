@@ -169,6 +169,7 @@ function! s:configure_plugins()
         Plug 'Xuyuanp/nerdtree-git-plugin'
         Plug 'itchyny/lightline.vim'
         Plug 'godlygeek/tabular'
+        Plug 'terryma/vim-expand-region'
 
 	" Themes
         Plug 'morhetz/gruvbox'
