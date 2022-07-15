@@ -82,6 +82,7 @@ function! s:configure_plugins()
         Plug 'dense-analysis/ale'
         Plug 'jiangmiao/auto-pairs'
         Plug 'jlanzarotta/bufexplorer'
+        Plug 'mattn/vim-gist'
 
 	" Themes
 
