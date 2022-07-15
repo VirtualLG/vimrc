@@ -250,6 +250,13 @@ function! s:configure_plugin_easymotion()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-signify
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_signify()
+        set updatetime=100
+endfunction
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -276,6 +283,7 @@ function! s:configure_plugins()
         Plug 'vim-scripts/gtags.vim'
         Plug 'preservim/tagbar'
         Plug 'easymotion/vim-easymotion'
+        Plug 'mhinz/vim-signify'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -298,6 +306,7 @@ function! s:configure_plugins()
         call s:configure_plugin_molokai()
         call s:configure_plugin_tagbar()
         call s:configure_plugin_easymotion()
+        call s:configure_plugin_signify()
 endfunction
 
 

@@ -103,10 +103,6 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsSnippetsDir="~/.vim_runtime/my_plugins/ultisnips"
 let g:UltiSnipsEditSplit="vertical"
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-signify
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-set updatetime=100
 
 " set mouse=a
 "
