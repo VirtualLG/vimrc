@@ -85,6 +85,7 @@ function! s:configure_plugins()
         Plug 'mattn/vim-gist'
 
 	" Themes
+        Plug 'morhetz/gruvbox'
 
         call plug#end()
 
