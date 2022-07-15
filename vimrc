@@ -79,6 +79,34 @@ function! s:configure_plugin_MRU()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Nerd Tree
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_NerdTree()
+        " Nerd Tree Config
+        let g:NERDTreeWinPos = "right"
+        let NERDTreeShowHidden=0
+        let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+        let g:NERDTreeWinSize=35
+        let NERDTreeMinimalUI=1          " 去除第一行的帮助提示
+        wincmd l
+        let NERDTreeDirArrows=1
+        let NERDTreeQuitOnOpen=1         " 打开新buffer时，退出nerdtree
+        let NERDTreeAutoDeleteBuffer=1   " 从NerdTree删除文件时，自动删除对应buffer
+
+        " NerdTree Key map
+        map <leader>nb :NERDTreeFromBookmark<Space>
+        map <leader>nf :NERDTreeFind<cr>
+        nmap <F3> :NERDTreeToggle<CR>
+
+        " 当所有文件关闭时，关闭项目树窗格
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+        " NerdTree sync
+        let g:nerdtree_sync_cursorline=1
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -93,6 +121,9 @@ function! s:configure_plugins()
         Plug 'jlanzarotta/bufexplorer'
         Plug 'mattn/vim-gist'
         Plug 'yegappan/mru'
+        Plug 'preservim/nerdtree'
+        Plug 'unkiwii/vim-nerdtree-sync'
+        Plug 'Xuyuanp/nerdtree-git-plugin'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -104,6 +135,7 @@ function! s:configure_plugins()
         call s:configure_plugin_ale()
         call s:configure_plugin_bufExp()
         call s:configure_plugin_MRU()
+        call s:configure_plugin_NerdTree()
 endfunction
 
 call s:configure_plugins()
