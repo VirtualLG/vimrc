@@ -58,6 +58,18 @@ function! s:configure_plugin_ale()
 endfunction
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => bufExplorer plugin
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_bufExp()
+        let g:bufExplorerDefaultHelp=0
+        let g:bufExplorerShowRelativePath=1
+        let g:bufExplorerFindActive=1
+        let g:bufExplorerSortBy='name'
+        map <leader>b :BufExplorer<cr>
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -69,6 +81,7 @@ function! s:configure_plugins()
         Plug 'mileszs/ack.vim'
         Plug 'dense-analysis/ale'
         Plug 'jiangmiao/auto-pairs'
+        Plug 'jlanzarotta/bufexplorer'
 
 	" Themes
 
@@ -77,6 +90,7 @@ function! s:configure_plugins()
         " Additional configs for the plugins
         call s:configure_plugin_ack()
         call s:configure_plugin_ale()
+        call s:configure_plugin_bufExp()
 endfunction
 
 call s:configure_plugins()
