@@ -137,6 +137,19 @@ let g:lightline = {
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => tabular
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_tabular()
+        if exists(":Tabularize")
+        nmap <Leader>a= :Tabularize /=<CR>
+        vmap <Leader>a= :Tabularize /=<CR>
+        nmap <Leader>a: :Tabularize /:\zs<CR>
+        vmap <Leader>a: :Tabularize /:\zs<CR>
+        endif
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -155,6 +168,7 @@ function! s:configure_plugins()
         Plug 'unkiwii/vim-nerdtree-sync'
         Plug 'Xuyuanp/nerdtree-git-plugin'
         Plug 'itchyny/lightline.vim'
+        Plug 'godlygeek/tabular'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -168,6 +182,7 @@ function! s:configure_plugins()
         call s:configure_plugin_MRU()
         call s:configure_plugin_NerdTree()
         call s:configure_plugin_lightline()
+        call s:configure_plugin_tabular()
 endfunction
 
 call s:configure_plugins()
