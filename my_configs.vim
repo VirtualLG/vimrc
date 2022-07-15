@@ -83,9 +83,6 @@ endfunction
 
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 
-"######################################### molokai color scheme
-let g:molokai_original = 1
-let g:rehash256 = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""
 " youcompleteme with SuperTab

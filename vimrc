@@ -209,6 +209,20 @@ function! s:configure_plugin_gtags()
         let GtagsCscope_Quiet = 1
 endfunction
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => molokai
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_molokai()
+        let g:molokai_original = 1
+        let g:rehash256 = 1
+
+        " Colorscheme
+        set background=dark
+        colorscheme molokai
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -236,6 +250,7 @@ function! s:configure_plugins()
 
 	" Themes
         Plug 'morhetz/gruvbox'
+        Plug 'tomasr/molokai'
 
         call plug#end()
 
@@ -251,6 +266,7 @@ function! s:configure_plugins()
         call s:configure_plugin_gitgutter()
         call s:configure_plugin_fzf()
         call s:configure_plugin_gtags()
+        call s:configure_plugin_molokai()
 endfunction
 
 
