@@ -160,6 +160,15 @@ function! s:configure_plugin_fugitive()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Git gutter (Git diff)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_gitgutter()
+        let g:gitgutter_enabled=0
+        nnoremap <silent> <leader>d :GitGutterToggle<cr>
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -181,6 +190,7 @@ function! s:configure_plugins()
         Plug 'godlygeek/tabular'
         Plug 'terryma/vim-expand-region'
         Plug 'tpope/vim-fugitive'
+        Plug 'airblade/vim-gitgutter'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -195,6 +205,7 @@ function! s:configure_plugins()
         call s:configure_plugin_NerdTree()
         call s:configure_plugin_lightline()
         call s:configure_plugin_tabular()
+        call s:configure_plugin_fugitive()
         call s:configure_plugin_fugitive()
 endfunction
 
