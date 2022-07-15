@@ -68,6 +68,7 @@ function! s:configure_plugins()
         " Plugins
         Plug 'mileszs/ack.vim'
         Plug 'dense-analysis/ale'
+        Plug 'jiangmiao/auto-pairs'
 
 	" Themes
 
