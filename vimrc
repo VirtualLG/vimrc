@@ -234,6 +234,22 @@ function! s:configure_plugin_tagbar()
         nmap <F2> :TagbarToggle<CR>           " <F2>作为toggle
 endfunction
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-easymotion
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_easymotion()
+        let g:EasyMotion_smartcase = 1
+
+        map <Space> <Plug>(easymotion-overwin-f2)
+        map <Space>h <Plug>(easymotion-linebackward)
+        map <Space>j <Plug>(easymotion-j)
+        map <Space>k <Plug>(easymotion-k)
+        map <Space>l <Plug>(easymotion-lineforward)
+        map <Space>. <Plug>(easymotion-repeat)
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -259,6 +275,7 @@ function! s:configure_plugins()
         Plug 'junegunn/fzf.vim'
         Plug 'vim-scripts/gtags.vim'
         Plug 'preservim/tagbar'
+        Plug 'easymotion/vim-easymotion'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -280,6 +297,7 @@ function! s:configure_plugins()
         call s:configure_plugin_gtags()
         call s:configure_plugin_molokai()
         call s:configure_plugin_tagbar()
+        call s:configure_plugin_easymotion()
 endfunction
 
 
