@@ -2,8 +2,8 @@
 " => Ack searching and cope displaying
 "    requires ack.vim - it's much better than vimgrep/grep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use the the_silver_searcher if possible (much faster than Ack)
 function! s:configure_plugin_ack()
+        " Use the the_silver_searcher if possible (much faster than Ack)
 	if executable('ag')
 		let g:ackprg = 'ag --vimgrep --smart-case'
 	endif
@@ -37,6 +37,27 @@ function! s:configure_plugin_ack()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Ale (syntax checker and linter)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_ale()
+        let g:ale_linters = {
+        \   'javascript': ['eslint'],
+        \   'python': ['flake8'],
+        \   'go': ['go', 'golint', 'errcheck']
+        \}
+
+        nmap <silent> <leader>a <Plug>(ale_next_wrap)
+
+        " Disabling highlighting
+        let g:ale_set_highlights = 0
+
+        " Only run linting when saving the file
+        let g:ale_lint_on_text_changed = 'never'
+        let g:ale_lint_on_enter = 0
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -46,6 +67,7 @@ function! s:configure_plugins()
 
         " Plugins
         Plug 'mileszs/ack.vim'
+        Plug 'dense-analysis/ale'
 
 	" Themes
 
@@ -53,6 +75,7 @@ function! s:configure_plugins()
 
         " Additional configs for the plugins
         call s:configure_plugin_ack()
+        call s:configure_plugin_ale()
 endfunction
 
 call s:configure_plugins()
