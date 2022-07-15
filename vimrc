@@ -150,6 +150,16 @@ function! s:configure_plugin_tabular()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Fugitive
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Copy the link to the line of a Git repository to the clipboard
+function! s:configure_plugin_fugitive()
+        nnoremap <leader>v :.GBrowse!<CR>
+        xnoremap <leader>v :'<'>GBrowse!<CR>
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -170,6 +180,7 @@ function! s:configure_plugins()
         Plug 'itchyny/lightline.vim'
         Plug 'godlygeek/tabular'
         Plug 'terryma/vim-expand-region'
+        Plug 'tpope/vim-fugitive'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -184,6 +195,7 @@ function! s:configure_plugins()
         call s:configure_plugin_NerdTree()
         call s:configure_plugin_lightline()
         call s:configure_plugin_tabular()
+        call s:configure_plugin_fugitive()
 endfunction
 
 call s:configure_plugins()
