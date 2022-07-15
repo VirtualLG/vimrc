@@ -257,6 +257,17 @@ function! s:configure_plugin_signify()
         set updatetime=100
 endfunction
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-tmux-navigator
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_tmux_navigator()
+        " actions while navigator to other tmux panes
+        " 1: update, write current buffer, but only if changed
+        " 2: wall, write all buffers
+        let g:tmux_navigator_save_on_switch = 2
+endfunction
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -284,6 +295,8 @@ function! s:configure_plugins()
         Plug 'preservim/tagbar'
         Plug 'easymotion/vim-easymotion'
         Plug 'mhinz/vim-signify'
+        Plug 'sheerun/vim-polyglot'
+        Plug 'christoomey/vim-tmux-navigator'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -307,6 +320,7 @@ function! s:configure_plugins()
         call s:configure_plugin_tagbar()
         call s:configure_plugin_easymotion()
         call s:configure_plugin_signify()
+        call s:configure_plugin_tmux_navigator()
 endfunction
 
 
