@@ -107,6 +107,37 @@ function! s:configure_plugin_NerdTree()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => lightline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_lightline()
+
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'active': {
+      \   'left': [ ['mode', 'paste'],
+      \             ['fugitive', 'readonly', 'absolutepath', 'modified'] ],
+      \   'right': [ [ 'lineinfo'  ],
+      \              [ 'percent'  ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex'  ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*FugitiveHead")?FugitiveHead():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*FugitiveHead") && ""!=FugitiveHead())'
+      \ },
+      \ 'separator': { 'left': ' ', 'right': '😜 ' },
+      \ 'subseparator': { 'left': ' ', 'right': ' ' }
+      \ }
+
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -124,6 +155,7 @@ function! s:configure_plugins()
         Plug 'preservim/nerdtree'
         Plug 'unkiwii/vim-nerdtree-sync'
         Plug 'Xuyuanp/nerdtree-git-plugin'
+        Plug 'itchyny/lightline.vim'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -136,6 +168,7 @@ function! s:configure_plugins()
         call s:configure_plugin_bufExp()
         call s:configure_plugin_MRU()
         call s:configure_plugin_NerdTree()
+        call s:configure_plugin_lightline()
 endfunction
 
 call s:configure_plugins()
