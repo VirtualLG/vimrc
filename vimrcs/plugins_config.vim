@@ -15,13 +15,6 @@ call pathogen#helptags()
 
 
 """"""""""""""""""""""""""""""
-" => MRU plugin
-""""""""""""""""""""""""""""""
-let MRU_Max_Entries = 400
-map <leader>f :MRU<CR>
-
-
-""""""""""""""""""""""""""""""
 " => YankStack
 """"""""""""""""""""""""""""""
 let g:yankstack_yank_keys = ['y', 'd']

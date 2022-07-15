@@ -70,6 +70,15 @@ function! s:configure_plugin_bufExp()
 endfunction
 
 
+""""""""""""""""""""""""""""""
+" => MRU plugin
+""""""""""""""""""""""""""""""
+function! s:configure_plugin_MRU()
+        let MRU_Max_Entries = 400
+        map <leader>f :MRU<CR>
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -83,6 +92,7 @@ function! s:configure_plugins()
         Plug 'jiangmiao/auto-pairs'
         Plug 'jlanzarotta/bufexplorer'
         Plug 'mattn/vim-gist'
+        Plug 'yegappan/mru'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -93,6 +103,7 @@ function! s:configure_plugins()
         call s:configure_plugin_ack()
         call s:configure_plugin_ale()
         call s:configure_plugin_bufExp()
+        call s:configure_plugin_MRU()
 endfunction
 
 call s:configure_plugins()
