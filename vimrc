@@ -320,6 +320,7 @@ function! s:configure_plugins()
         Plug 'farmergreg/vim-lastplace'
         Plug 'mg979/vim-visual-multi', {'branch': 'master'}
         Plug 'nvie/vim-flake8'
+        Plug 'ycm-core/YouCompleteMe'
 
 	" Themes
         Plug 'morhetz/gruvbox'
