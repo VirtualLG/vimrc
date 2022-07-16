@@ -258,6 +258,14 @@ function! s:configure_plugin_signify()
 endfunction
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-polyglot
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_polyglot()
+        let g:polyglot_is_disabled = {'sensible': 1}
+endfunction
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-tmux-navigator
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -344,6 +352,7 @@ function! s:configure_plugins()
         call s:configure_plugin_tagbar()
         call s:configure_plugin_easymotion()
         call s:configure_plugin_signify()
+        call s:configure_plugin_polyglot()
         call s:configure_plugin_tmux_navigator()
 endfunction
 
