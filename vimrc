@@ -268,6 +268,23 @@ function! s:configure_plugin_tmux_navigator()
         let g:tmux_navigator_save_on_switch = 2
 endfunction
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => surround.vim config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_vim_surround()
+        " fake function, never be called, just for note
+        " cs"]    |     change surrounding
+        " cs]{    |     change surroouding, {  } 内部带空格
+        " cs]}    |     change surrounding, {} 内部不带空格
+        " ds"     |     delete surrounding
+        " ysiw]   |     add surrounding in word
+        " yssb    |     为整行添加 surrounding
+        " yss]    |     为整行添加 surrounding
+        " S       |     Visual 模式下，添加 surrounding
+endfunction
+
+
 " -----------------------------------------------------------------------
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
@@ -298,6 +315,7 @@ function! s:configure_plugins()
         Plug 'sheerun/vim-polyglot'
         Plug 'christoomey/vim-tmux-navigator'
         Plug 'lfv89/vim-interestingwords'
+        Plug 'tpope/vim-surround'
 
 	" Themes
         Plug 'morhetz/gruvbox'
