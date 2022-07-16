@@ -317,6 +317,7 @@ function! s:configure_plugins()
         Plug 'lfv89/vim-interestingwords'
         Plug 'tpope/vim-surround'
         Plug 'tpope/vim-repeat'
+        Plug 'farmergreg/vim-lastplace'
 
 	" Themes
         Plug 'morhetz/gruvbox'
