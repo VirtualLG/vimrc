@@ -316,6 +316,7 @@ function! s:configure_plugins()
         Plug 'christoomey/vim-tmux-navigator'
         Plug 'lfv89/vim-interestingwords'
         Plug 'tpope/vim-surround'
+        Plug 'tpope/vim-repeat'
 
 	" Themes
         Plug 'morhetz/gruvbox'
