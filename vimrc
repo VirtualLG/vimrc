@@ -261,8 +261,8 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " => vim-polyglot
 """""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:configure_plugin_polyglot()
-        let g:polyglot_is_disabled = {'sensible': 1}
+function! s:preconfigure_plugin_polyglot()
+        let g:polyglot_disabled = ['sensible']
 endfunction
 
 
@@ -299,6 +299,9 @@ endfunction
 function! s:configure_plugins()
         " Plugins directory
         call plug#begin('~/.vim_runtime/plugins')
+
+        " Pre configs for the plugins
+        call s:preconfigure_plugin_polyglot()
 
         " Plugins
         Plug 'mileszs/ack.vim'
@@ -352,7 +355,6 @@ function! s:configure_plugins()
         call s:configure_plugin_tagbar()
         call s:configure_plugin_easymotion()
         call s:configure_plugin_signify()
-        call s:configure_plugin_polyglot()
         call s:configure_plugin_tmux_navigator()
 endfunction
 
