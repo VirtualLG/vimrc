@@ -319,6 +319,7 @@ function! s:configure_plugins()
         Plug 'tpope/vim-repeat'
         Plug 'farmergreg/vim-lastplace'
         Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+        Plug 'nvie/vim-flake8'
 
 	" Themes
         Plug 'morhetz/gruvbox'
