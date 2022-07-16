@@ -333,6 +333,7 @@ function! s:configure_plugins()
         Plug 'mg979/vim-visual-multi', {'branch': 'master'}
         Plug 'nvie/vim-flake8'
         Plug 'ycm-core/YouCompleteMe'
+        Plug 'WolfgangMehner/c-support'
 
 	" Themes
         Plug 'morhetz/gruvbox'
