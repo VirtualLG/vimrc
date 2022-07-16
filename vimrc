@@ -231,7 +231,8 @@ function! s:configure_plugin_tagbar()
         let g:tagbar_iconchars = ['▸', '▾']   " 个人爱好，展开关闭文件夹的图标
         let g:tagbar_left = 1                 " 配置tagbar窗口位于左侧
 
-        nmap <F2> :TagbarToggle<CR>           " <F2>作为toggle
+        " tagbar mapping
+        nmap <F2> :TagbarToggle<cr>
 endfunction
 
 
