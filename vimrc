@@ -318,6 +318,7 @@ function! s:configure_plugins()
         Plug 'tpope/vim-surround'
         Plug 'tpope/vim-repeat'
         Plug 'farmergreg/vim-lastplace'
+        Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 	" Themes
         Plug 'morhetz/gruvbox'
