@@ -294,7 +294,14 @@ function! s:configure_plugin_vim_surround()
 endfunction
 
 
-" -----------------------------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => surround.vim config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_c_support()
+        let g:C_Ctrl_j = 'off'
+endfunction
+
+
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
 function! s:configure_plugins()
@@ -358,6 +365,7 @@ function! s:configure_plugins()
         call s:configure_plugin_easymotion()
         call s:configure_plugin_signify()
         call s:configure_plugin_tmux_navigator()
+        call s:configure_plugin_c_support()
 endfunction
 
 
