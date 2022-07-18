@@ -275,6 +275,7 @@ function! s:configure_plugin_tmux_navigator()
         " 1: update, write current buffer, but only if changed
         " 2: wall, write all buffers
         let g:tmux_navigator_save_on_switch = 2
+        let g:tmux_navigator_no_mappings = 0
 endfunction
 
 
