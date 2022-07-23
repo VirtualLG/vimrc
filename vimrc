@@ -74,7 +74,7 @@ endfunction
 " => MRU plugin
 """"""""""""""""""""""""""""""
 function! s:configure_plugin_MRU()
-        let MRU_Max_Entries = 400
+        let g:MRU_Max_Entries = 400
         map <leader>f :MRU<CR>
 endfunction
 
