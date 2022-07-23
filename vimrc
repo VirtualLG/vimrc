@@ -199,14 +199,16 @@ endfunction
 " => gtags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:configure_plugin_gtags()
-        set cscopetag " 使用 cscope 作为 tags 命令
-        set cscopeprg='gtags-cscope' " 使用 gtags-cscope 代替 cscope
+        let $GTAGSLABEL = 'native-pygments'
+        let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
 
-        "gtags.vim 设置项
-        let GtagsCscope_Auto_Load = 1
-        let GtagsCscope_Ignore_Case = 1
-        let GtagsCscope_Auto_Map = 1
-        let GtagsCscope_Quiet = 1
+        set cscopetag " 使用 cscope 作为 tags 命令
+
+        "gtags-cscope.vim 设置项
+        let g:GtagsCscope_Auto_Load = 1
+        let g:GtagsCscope_Ignore_Case = 1
+        let g:GtagsCscope_Auto_Map = 1
+        let g:GtagsCscope_Quiet = 1
 endfunction
 
 
@@ -307,7 +309,7 @@ endfunction
 " -----------------------------------------------------------------------
 function! s:configure_plugins()
         " Plugins directory
-        call plug#begin('~/.vim_runtime/plugins')
+        call plug#begin('~/.vim/plugins')
 
         " Pre configs for the plugins
         call s:preconfigure_plugin_polyglot()
@@ -328,7 +330,6 @@ function! s:configure_plugins()
         Plug 'tpope/vim-fugitive'
         Plug 'airblade/vim-gitgutter'
         Plug 'junegunn/fzf.vim'
-        Plug 'vim-scripts/gtags.vim'
         Plug 'preservim/tagbar'
         Plug 'easymotion/vim-easymotion'
         Plug 'mhinz/vim-signify'
