@@ -298,7 +298,7 @@ endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => surround.vim config
+" => c-support config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:configure_plugin_c_support()
         let g:C_Ctrl_j = 'off'
