@@ -10,6 +10,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 set nrformats=
 
 set colorcolumn=81
+set textwidth=81
 
 :hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
 :hi TabLine ctermfg=Blue ctermbg=Yellow
