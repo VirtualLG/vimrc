@@ -390,16 +390,31 @@ function! s:set_proj_root()
         endif
 
         if tags_path != ""
-        exe "chdir " . tags_path
+                exe "chdir " . tags_path
         endif
 endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+" Toggle Quick Fix Window
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utils main
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:utils_func_main()
+        " get proj root by GTAGS file
         call s:set_proj_root()
+
+        " Use <F4> to toggle quick fix window
+        nnoremap <silent> <F4> :call ToggleQuickFix()<cr>
 endfunction
 
 call s:utils_func_main()
