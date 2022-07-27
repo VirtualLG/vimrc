@@ -412,10 +412,23 @@ endfunction
 function! s:utils_func_main()
         " get proj root by GTAGS file
         call s:set_proj_root()
+endfunction
+
+" ----------------------------------------------------------------------
+"  Key Mappings
+" ----------------------------------------------------------------------
+function! s:configure_global_mappings()
+        " paster from register 0
+        map <Space>p "0p
 
         " Use <F4> to toggle quick fix window
         nnoremap <silent> <F4> :call ToggleQuickFix()<cr>
 endfunction
 
+
+" ----------------------------------------------------------------------
+"  Main Routine
+" ----------------------------------------------------------------------
 call s:utils_func_main()
 call s:configure_plugins()
+call s:configure_global_mappings()
