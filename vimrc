@@ -298,6 +298,62 @@ endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => YouCompleteMe config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_ycm()
+        " ----------------------
+        " install
+        " ----------------------
+        " python3 install.py --clangd-completer   编译安装 ycm, 支持类 C 语言
+        " python3 install.py --cs-completer       编译安装 ycm, 支持 #
+        " python3 install.py --go-completer       编译安装 ycm, 支持 go
+        " python3 install.py --ts-completer       编译安装 ycm, 支持 JavaScript 和 TypeScript，
+        "                                                需要安装 Node.js 和 npm
+        " python3 install.py --rust-completer     编译安装 ycm, 支持 Rust
+        " python3 install.py --java-completer     编译安装 ycm, 支持 Java
+        "                                                需要安装 JDK
+        " python3 install.py --all                编译安装 ycm, 支持以上所有语言包
+
+        " ----------------------
+        " 语法高亮
+        " ----------------------
+        let g:ycm_enable_semantic_highlighting=1
+        let MY_YCM_HIGHLIGHT_GROUP = {
+              \   'typeParameter': 'PreProc',
+              \   'parameter': 'Normal',
+              \   'variable': 'Normal',
+              \   'property': 'Normal',
+              \   'enumMember': 'Normal',
+              \   'event': 'Special',
+              \   'member': 'Normal',
+              \   'method': 'Normal',
+              \   'class': 'Special',
+              \   'namespace': 'Special',
+        \ }
+
+        for tokenType in keys( MY_YCM_HIGHLIGHT_GROUP )
+          call prop_type_add( 'YCM_HL_' . tokenType,
+                    \ { 'highlight': MY_YCM_HIGHLIGHT_GROUP[ tokenType ] } )
+        endfor
+
+        " ----------------------
+        " 其他配置
+        " ----------------------
+        let ycm_conf = getcwd() . "/.ycm_extra_conf.py"
+        if filereadable(ycm_conf)
+                let g:ycm_global_ycm_extra_conf = ycm_conf
+        else
+                let g:ycm_global_ycm_extra_conf = "~/.vim/ycm_conf/ycm_extra_conf.py"
+        endif
+        let g:ycm_min_num_of_chars_for_completion = 1      " 输入一个字符后就开始联想补全
+        let g:ycm_complete_in_comments = 1                 " 补全功能在注释中生效
+        let g:ycm_confirm_extra_conf=0                     " 允许 vim 加载 .ycm_extra_conf.py 文件，不再提示"
+        let g:ycm_seed_identifiers_with_syntax = 1         " 补全语法关键字
+        let g:ycm_collect_identifiers_from_tags_files = 1  " 补全引擎包含tag文件
+endfunction
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => c-support config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:configure_plugin_c_support()
@@ -367,6 +423,7 @@ function! s:configure_plugins()
         call s:configure_plugin_easymotion()
         call s:configure_plugin_signify()
         call s:configure_plugin_tmux_navigator()
+        call s:configure_plugin_ycm()
         call s:configure_plugin_c_support()
 endfunction
 
