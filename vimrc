@@ -298,6 +298,22 @@ endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => supertab for ultisnips and ycm work together
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_supertab()
+        " make YCM compatible with UltiSnips (using supertab)
+        let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+        let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+        let g:SuperTabDefaultCompletionType = '<C-n>'
+
+        " better key bindings for UltiSnipsExpandTrigger
+        let g:UltiSnipsExpandTrigger = "<tab>"
+        let g:UltiSnipsJumpForwardTrigger = "<tab>"
+        let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+endfunction
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YouCompleteMe config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:configure_plugin_ycm()
@@ -389,7 +405,10 @@ function! s:configure_plugins()
         Plug 'farmergreg/vim-lastplace'
         Plug 'mg979/vim-visual-multi', {'branch': 'master'}
         Plug 'nvie/vim-flake8'
+        Plug 'ervandew/supertab'
         Plug 'ycm-core/YouCompleteMe'
+        Plug 'SirVer/ultisnips'
+        Plug 'honza/vim-snippets'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -414,6 +433,7 @@ function! s:configure_plugins()
         call s:configure_plugin_easymotion()
         call s:configure_plugin_signify()
         call s:configure_plugin_tmux_navigator()
+        call s:configure_plugin_supertab()
         call s:configure_plugin_ycm()
 endfunction
 
