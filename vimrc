@@ -353,14 +353,6 @@ function! s:configure_plugin_ycm()
 endfunction
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => c-support config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:configure_plugin_c_support()
-        let g:C_Ctrl_j = 'off'
-endfunction
-
-
 "   For the vim scripts manager --- vim plug
 " -----------------------------------------------------------------------
 function! s:configure_plugins()
@@ -398,7 +390,6 @@ function! s:configure_plugins()
         Plug 'mg979/vim-visual-multi', {'branch': 'master'}
         Plug 'nvie/vim-flake8'
         Plug 'ycm-core/YouCompleteMe'
-        Plug 'WolfgangMehner/c-support'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -424,7 +415,6 @@ function! s:configure_plugins()
         call s:configure_plugin_signify()
         call s:configure_plugin_tmux_navigator()
         call s:configure_plugin_ycm()
-        call s:configure_plugin_c_support()
 endfunction
 
 
