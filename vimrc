@@ -176,6 +176,7 @@ function! s:configure_plugin_fzf()
         set rtp+=~/.fzf
 
         nmap <C-p> :FZF<CR>
+        nmap <C-m> :Buffers<CR>
         " Mapping selecting mappings
         nmap <leader><tab> <plug>(fzf-maps-n)
         xmap <leader><tab> <plug>(fzf-maps-x)
