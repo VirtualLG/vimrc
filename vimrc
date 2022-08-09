@@ -410,6 +410,7 @@ function! s:configure_plugins()
         Plug 'ycm-core/YouCompleteMe'
         Plug 'SirVer/ultisnips'
         Plug 'honza/vim-snippets'
+        Plug 'tpope/vim-commentary'
 
 	" Themes
         Plug 'morhetz/gruvbox'
