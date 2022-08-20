@@ -299,6 +299,20 @@ endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim visual multi config
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:configure_plugin_vm()
+        let g:VM_mouse_mappings    = 1
+        let g:VM_theme             = 'iceblue'
+        let g:VM_highlight_matches = 'underline'
+        let g:VM_leader            = ',,'
+        let g:VM_maps              = {}
+        let g:VM_maps["Undo"]      = 'u'
+        let g:VM_maps["Redo"]      = '<C-r>'
+endfunction
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => supertab for ultisnips and ycm work together
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:configure_plugin_supertab()
@@ -411,6 +425,7 @@ function! s:configure_plugins()
         Plug 'SirVer/ultisnips'
         Plug 'honza/vim-snippets'
         Plug 'tpope/vim-commentary'
+        Plug 'drmikehenry/vim-fixkey'
 
 	" Themes
         Plug 'morhetz/gruvbox'
@@ -435,6 +450,7 @@ function! s:configure_plugins()
         call s:configure_plugin_easymotion()
         call s:configure_plugin_signify()
         call s:configure_plugin_tmux_navigator()
+        call s:configure_plugin_vm()
         call s:configure_plugin_supertab()
         call s:configure_plugin_ycm()
 endfunction
