@@ -590,6 +590,25 @@ function! s:configure_vim_ui()
 
         " Add a bit extra margin to the left
         set foldcolumn=1
+
+        " Set font according to system
+        if has("mac") || has("macunix")
+            set gfn=IBM\ Plex\ Mono:h14,Hack:h14,Source\ Code\ Pro:h15,Menlo:h15
+        elseif has("win16") || has("win32")
+            set gfn=IBM\ Plex\ Mono:h14,Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
+        elseif has("gui_gtk2")
+            set gfn=IBM\ Plex\ Mono\ 14,:Hack\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+        elseif has("linux")
+            set gfn=IBM\ Plex\ Mono\ 14,:Hack\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+        elseif has("unix")
+            set gfn=Monospace\ 11
+        endif
+
+        " Disable scrollbars (real hackers don't use scrollbars for navigation!)
+        set guioptions-=r
+        set guioptions-=R
+        set guioptions-=l
+        set guioptions-=L
 endfunction
 
 
@@ -649,6 +668,21 @@ function! s:configure_vim_tricks()
 
         " Toggle paste mode on and off
         map <leader>pp :setlocal paste!<cr>
+
+        " Fast editing and reloading of vimrc configs
+        map <leader>e :e! ~/.vim/my_configs.vim<cr>
+        autocmd! bufwritepost ~/.vim/my_configs.vim source ~/.vim/my_configs.vim
+
+        " => Turn persistent undo on
+        "    means that you can undo even when you close a buffer/VIM
+        try
+            set undodir=~/.vim/temp_dirs/undodir
+            set undofile
+        catch
+        endtry
+
+
+
 
 endfunction
 
@@ -787,7 +821,91 @@ function! s:configure_global_mappings()
         map <leader>sa zg
         map <leader>s? z=
 
+        " => Command mode related
+        " Smart mappings on the command line
+        cno $h e ~/
+        cno $d e ~/Desktop/
+        cno $j e ./
+        cno $c e <C-\>eCurrentFileDir("e")<cr>
+
+        " $q is super useful when browsing on the command line
+        " it deletes everything until the last slash
+        cno $q <C-\>eDeleteTillSlash()<cr>
+
+        " Bash like keys for the command line
+        cnoremap <C-A>		<Home>
+        cnoremap <C-E>		<End>
+        cnoremap <C-K>		<C-U>
+
+        cnoremap <C-P> <Up>
+        cnoremap <C-N> <Down>
+
+        " Map ½ to something useful
+        map ½ $
+        cmap ½ $
+        imap ½ $
+
+        " 26/08/22 20:03:55, input 'xdate' in insert mode
+        iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+
+        " compile && run
+        map <F5> :call CompileRun()<CR>
+        imap <F5> <Esc>:call CompileRun()<CR>
+        vmap <F5> <Esc>:call CompileRun()<CR>
+
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+func! DeleteTillSlash()
+    let g:cmd = getcmdline()
+
+    if has("win16") || has("win32")
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
+    else
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+    endif
+
+    if g:cmd == g:cmd_edited
+        if has("win16") || has("win32")
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
+        else
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+        endif
+    endif
+
+    return g:cmd_edited
+endfunc
+
+func! CurrentFileDir(cmd)
+    return a:cmd . " " . expand("%:p:h") . "/"
+endfunc
+
+func! CompileRun()
+exec "w"
+if &filetype == 'c'
+    exec "!gcc % -o %<"
+    exec "!time ./%<"
+elseif &filetype == 'cpp'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!time java %"
+elseif &filetype == 'sh'
+    exec "!time bash %"
+elseif &filetype == 'python'
+    exec "!time python3 %"
+elseif &filetype == 'html'
+    exec "!google-chrome % &"
+elseif &filetype == 'go'
+    exec "!go build %<"
+    exec "!time go run %"
+elseif &filetype == 'matlab'
+    exec "!time octave %"
+endif
+endfunc
 
 
 " ----------------------------------------------------------------------
