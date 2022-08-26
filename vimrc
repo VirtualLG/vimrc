@@ -1,4 +1,132 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+function! AutoHighlightToggle()
+   let @/ = ''
+   if exists('#auto_highlight')
+     au! auto_highlight
+     augroup! auto_highlight
+     setl updatetime=4000
+     echo 'Highlight current word: off'
+     return 0
+  else
+    augroup auto_highlight
+    au!
+    au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    setl updatetime=500
+    echo 'Highlight current word: ON'
+  return 1
+ endif
+endfunction
+
+" Toggle window fullscreen
+function! Zoom ()
+    " check if is the zoomed state (tabnumber > 1 && window == 1)
+    if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
+        let l:cur_winview = winsaveview()
+        let l:cur_bufname = bufname('')
+        tabclose
+
+        " restore the view
+        if l:cur_bufname == bufname('')
+            call winrestview(cur_winview)
+        endif
+    else
+        tab split
+    endif
+endfunction
+
+func! DeleteTillSlash()
+    let g:cmd = getcmdline()
+
+    if has("win16") || has("win32")
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
+    else
+        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
+    endif
+
+    if g:cmd == g:cmd_edited
+        if has("win16") || has("win32")
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
+        else
+            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
+        endif
+    endif
+
+    return g:cmd_edited
+endfunc
+
+func! CurrentFileDir(cmd)
+    return a:cmd . " " . expand("%:p:h") . "/"
+endfunc
+
+func! CompileRun()
+exec "w"
+if &filetype == 'c'
+    exec "!gcc % -o %<"
+    exec "!time ./%<"
+elseif &filetype == 'cpp'
+    exec "!g++ % -o %<"
+    exec "!time ./%<"
+elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!time java %"
+elseif &filetype == 'sh'
+    exec "!time bash %"
+elseif &filetype == 'python'
+    exec "!time python3 %"
+elseif &filetype == 'html'
+    exec "!google-chrome % &"
+elseif &filetype == 'go'
+    exec "!go build %<"
+    exec "!time go run %"
+elseif &filetype == 'matlab'
+    exec "!time octave %"
+endif
+endfunc
+
+function! JavaScriptFold()
+    setl foldmethod=syntax
+    setl foldlevelstart=1
+    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
+
+    function! FoldText()
+        return substitute(getline(v:foldstart), '{.*', '{...}', '')
+    endfunction
+    setl foldtext=FoldText()
+endfunction
+
+function! CoffeeScriptFold()
+    setl foldmethod=indent
+    setl foldlevelstart=1
+endfunction
+
+" Delete trailing white space on save, useful for some filetypes ;)
+fun! CleanExtraSpaces()
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+endfun
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Toggle Quick Fix Window
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ack searching and cope displaying
 "    requires ack.vim - it's much better than vimgrep/grep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -692,7 +820,7 @@ function! s:configure_vim_tricks()
 
         " 保存时，自动删除行尾空格
         autocmd BufWritePre * :%s/\s\+$//e
-        
+
         " vim默认会把以0开头的数字，识别为8进制数
         " 使用以下配置，告诉vim，把所有数字都当成十进制
         set nrformats=
@@ -718,23 +846,13 @@ endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-" Toggle Quick Fix Window
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function ToggleQuickFix()
-    if empty(filter(getwininfo(), 'v:val.quickfix'))
-        copen
-    else
-        cclose
-    endif
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Utils main
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:utils_func_main()
         call s:configure_vim_general()
         call s:configure_vim_ui()
         call s:configure_vim_colors_and_fonts()
+        call s:configure_vim_tricks()
         " get proj root by GTAGS file
         call s:set_proj_root()
 endfunction
@@ -810,15 +928,6 @@ function! s:configure_global_mappings()
           vmap <D-k> <M-k>
         endif
 
-        " Delete trailing white space on save, useful for some filetypes ;)
-        fun! CleanExtraSpaces()
-            let save_cursor = getpos(".")
-            let old_query = getreg('/')
-            silent! %s/\s\+$//e
-            call setpos('.', save_cursor)
-            call setreg('/', old_query)
-        endfun
-
         if has("autocmd")
             autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
         endif
@@ -876,97 +985,56 @@ function! s:configure_global_mappings()
         nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 endfunction
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Highlight all instances of word under cursor, when idle.
-" Useful when studying strange source code.
-" Type z/ to toggle highlighting on/off.
-function! AutoHighlightToggle()
-   let @/ = ''
-   if exists('#auto_highlight')
-     au! auto_highlight
-     augroup! auto_highlight
-     setl updatetime=4000
-     echo 'Highlight current word: off'
-     return 0
-  else
-    augroup auto_highlight
-    au!
-    au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-    augroup end
-    setl updatetime=500
-    echo 'Highlight current word: ON'
-  return 1
- endif
-endfunction
+function! s:configure_vim_filetype()
+        " => Python section
+        let python_highlight_all = 1
+        au FileType python syn keyword pythonDecorator True None False self
 
-" Toggle window fullscreen
-function! Zoom ()
-    " check if is the zoomed state (tabnumber > 1 && window == 1)
-    if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
-        let l:cur_winview = winsaveview()
-        let l:cur_bufname = bufname('')
-        tabclose
+        au BufNewFile,BufRead *.jinja set syntax=htmljinja
+        au BufNewFile,BufRead *.mako set ft=mako
 
-        " restore the view
-        if l:cur_bufname == bufname('')
-            call winrestview(cur_winview)
+        au FileType python map <buffer> F :set foldmethod=indent<cr>
+
+        au FileType python inoremap <buffer> $r return
+        au FileType python inoremap <buffer> $i import
+        au FileType python inoremap <buffer> $p print
+        au FileType python inoremap <buffer> $f # --- <esc>a
+        au FileType python map <buffer> <leader>1 /class
+        au FileType python map <buffer> <leader>2 /def
+        au FileType python map <buffer> <leader>C ?class
+        au FileType python map <buffer> <leader>D ?def
+
+        " => JavaScript section
+        au FileType javascript call JavaScriptFold()
+        au FileType javascript setl fen
+        au FileType javascript setl nocindent
+
+        au FileType javascript,typescript imap <C-t> console.log();<esc>hi
+        au FileType javascript,typescript imap <C-a> alert();<esc>hi
+
+        au FileType javascript,typescript inoremap <buffer> $r return
+        au FileType javascript,typescript inoremap <buffer> $f // --- PH<esc>FP2xi
+
+        " => CoffeeScript section
+        au FileType coffee call CoffeeScriptFold()
+
+        au FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+        " => Shell section
+        if exists('$TMUX')
+            if has('nvim')
+                set termguicolors
+            else
+                set term=screen-256color
+            endif
         endif
-    else
-        tab split
-    endif
+
+        " => Twig section
+        autocmd BufRead *.twig set syntax=html filetype=html
+
+        " => Markdown
+        let vim_markdown_folding_disabled = 1
 endfunction
-
-func! DeleteTillSlash()
-    let g:cmd = getcmdline()
-
-    if has("win16") || has("win32")
-        let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
-    else
-        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
-    endif
-
-    if g:cmd == g:cmd_edited
-        if has("win16") || has("win32")
-            let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
-        else
-            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
-        endif
-    endif
-
-    return g:cmd_edited
-endfunc
-
-func! CurrentFileDir(cmd)
-    return a:cmd . " " . expand("%:p:h") . "/"
-endfunc
-
-func! CompileRun()
-exec "w"
-if &filetype == 'c'
-    exec "!gcc % -o %<"
-    exec "!time ./%<"
-elseif &filetype == 'cpp'
-    exec "!g++ % -o %<"
-    exec "!time ./%<"
-elseif &filetype == 'java'
-    exec "!javac %"
-    exec "!time java %"
-elseif &filetype == 'sh'
-    exec "!time bash %"
-elseif &filetype == 'python'
-    exec "!time python3 %"
-elseif &filetype == 'html'
-    exec "!google-chrome % &"
-elseif &filetype == 'go'
-    exec "!go build %<"
-    exec "!time go run %"
-elseif &filetype == 'matlab'
-    exec "!time octave %"
-endif
-endfunc
-
 
 " ----------------------------------------------------------------------
 "  Main Routine
@@ -974,70 +1042,6 @@ endfunc
 call s:utils_func_main()
 call s:configure_plugins()
 call s:configure_global_mappings()
+call s:configure_vim_filetype()
 
 
-"------------------------------------------------- => File type related
-" => Python section
-let python_highlight_all = 1
-au FileType python syn keyword pythonDecorator True None False self
-
-au BufNewFile,BufRead *.jinja set syntax=htmljinja
-au BufNewFile,BufRead *.mako set ft=mako
-
-au FileType python map <buffer> F :set foldmethod=indent<cr>
-
-au FileType python inoremap <buffer> $r return
-au FileType python inoremap <buffer> $i import
-au FileType python inoremap <buffer> $p print
-au FileType python inoremap <buffer> $f # --- <esc>a
-au FileType python map <buffer> <leader>1 /class
-au FileType python map <buffer> <leader>2 /def
-au FileType python map <buffer> <leader>C ?class
-au FileType python map <buffer> <leader>D ?def
-
-" => JavaScript section
-au FileType javascript call JavaScriptFold()
-au FileType javascript setl fen
-au FileType javascript setl nocindent
-
-au FileType javascript,typescript imap <C-t> console.log();<esc>hi
-au FileType javascript,typescript imap <C-a> alert();<esc>hi
-
-au FileType javascript,typescript inoremap <buffer> $r return
-au FileType javascript,typescript inoremap <buffer> $f // --- PH<esc>FP2xi
-
-function! JavaScriptFold()
-    setl foldmethod=syntax
-    setl foldlevelstart=1
-    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-    function! FoldText()
-        return substitute(getline(v:foldstart), '{.*', '{...}', '')
-    endfunction
-    setl foldtext=FoldText()
-endfunction
-
-
-" => CoffeeScript section
-function! CoffeeScriptFold()
-    setl foldmethod=indent
-    setl foldlevelstart=1
-endfunction
-au FileType coffee call CoffeeScriptFold()
-
-au FileType gitcommit call setpos('.', [0, 1, 1, 0])
-
-" => Shell section
-if exists('$TMUX')
-    if has('nvim')
-        set termguicolors
-    else
-        set term=screen-256color
-    endif
-endif
-
-" => Twig section
-autocmd BufRead *.twig set syntax=html filetype=html
-
-" => Markdown
-let vim_markdown_folding_disabled = 1
