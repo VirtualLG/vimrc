@@ -513,6 +513,12 @@ function! s:configure_vim_general()
         " Always show the status line
         set laststatus=2
 
+        " 高亮第81列
+        set colorcolumn=81
+
+        " 用于格式化行
+        set textwidth=81
+
 endfunction
 
 
@@ -647,6 +653,10 @@ function! s:configure_vim_colors_and_fonts()
         " Use Unix as the standard file type
         set ffs=unix,dos,mac
 
+        " 不记得有啥用了，先留着
+        :hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
+        :hi TabLine ctermfg=Blue ctermbg=Yellow
+        :hi TabLineSel ctermfg=Red ctermbg=Yellow
 endfunction
 
 
@@ -670,8 +680,7 @@ function! s:configure_vim_tricks()
         map <leader>pp :setlocal paste!<cr>
 
         " Fast editing and reloading of vimrc configs
-        map <leader>e :e! ~/.vim/my_configs.vim<cr>
-        autocmd! bufwritepost ~/.vim/my_configs.vim source ~/.vim/my_configs.vim
+        map <leader>e :e! ~/.vim/vimrc<cr>
 
         " => Turn persistent undo on
         "    means that you can undo even when you close a buffer/VIM
@@ -681,9 +690,12 @@ function! s:configure_vim_tricks()
         catch
         endtry
 
-
-
-
+        " 保存时，自动删除行尾空格
+        autocmd BufWritePre * :%s/\s\+$//e
+        
+        " vim默认会把以0开头的数字，识别为8进制数
+        " 使用以下配置，告诉vim，把所有数字都当成十进制
+        set nrformats=
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -853,11 +865,59 @@ function! s:configure_global_mappings()
         imap <F5> <Esc>:call CompileRun()<CR>
         vmap <F5> <Esc>:call CompileRun()<CR>
 
+        " Toggle window fullscreen
+        nmap <leader>z :call Zoom()<CR>
+
+        " Switch to left/right tab
+        nnoremap H gT
+        nnoremap L gt
+
+        " AutoHighlight
+        nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+function! AutoHighlightToggle()
+   let @/ = ''
+   if exists('#auto_highlight')
+     au! auto_highlight
+     augroup! auto_highlight
+     setl updatetime=4000
+     echo 'Highlight current word: off'
+     return 0
+  else
+    augroup auto_highlight
+    au!
+    au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    setl updatetime=500
+    echo 'Highlight current word: ON'
+  return 1
+ endif
+endfunction
+
+" Toggle window fullscreen
+function! Zoom ()
+    " check if is the zoomed state (tabnumber > 1 && window == 1)
+    if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
+        let l:cur_winview = winsaveview()
+        let l:cur_bufname = bufname('')
+        tabclose
+
+        " restore the view
+        if l:cur_bufname == bufname('')
+            call winrestview(cur_winview)
+        endif
+    else
+        tab split
+    endif
+endfunction
+
 func! DeleteTillSlash()
     let g:cmd = getcmdline()
 
