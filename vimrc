@@ -743,6 +743,10 @@ function! s:configure_vim_ui()
         set guioptions-=R
         set guioptions-=l
         set guioptions-=L
+
+        " Display line number and relative line number
+        set nu
+        set rnu
 endfunction
 
 
