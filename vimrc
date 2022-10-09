@@ -407,6 +407,8 @@ function! s:configure_plugin_tmux_navigator()
         " 2: wall, write all buffers
         let g:tmux_navigator_save_on_switch = 2
         let g:tmux_navigator_no_mappings = 0
+	" Disable tmux navigator when zooming the Vim pane
+	let g:tmux_navigator_disable_when_zoomed = 1
 endfunction
 
 
